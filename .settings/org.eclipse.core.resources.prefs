@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+encoding//src/main/java/com/capgemini/chess/algorithms/data/generated/Board.java=UTF-8
+encoding//src/main/java/com/capgemini/chess/algorithms/implementation/BoardManager.java=UTF-8
+encoding//src/main/java/com/capgemini/chess/algorithms/pieces/King.java=UTF-8
+encoding//src/main/java/com/capgemini/chess/algorithms/pieces/Pawn.java=UTF-8
+encoding//src/test/java/com/capgemini/chess/algorithms/implementation/BoardManagerTest.java=UTF-8
