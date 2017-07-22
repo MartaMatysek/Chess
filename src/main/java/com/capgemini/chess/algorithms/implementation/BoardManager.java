@@ -166,6 +166,12 @@ public class BoardManager {
 
 	// PRIVATE
 	
+	/**
+	 * getExceptionForInvalidateMove throws exception if some conditions are incorrect
+	 * @param from source coordinate
+	 * @param to target coordinate
+	 * @throws InvalidMoveException
+	 */
 	private void getExceptionForInvalidateMove(Coordinate from, Coordinate to) throws InvalidMoveException {
 		MoveValidator moveValidator = new MoveValidator();
 
@@ -264,6 +270,14 @@ public class BoardManager {
 		this.board.setPieceAt(null, lastMove.getTo());
 	}
 	
+	/**
+	 * make a move if possible 
+	 * @param from source coordinate
+	 * @param to target coordinate
+	 * @return move 
+	 * @throws InvalidMoveException
+	 * @throws KingInCheckException
+	 */
 	private Move validateMove(Coordinate from, Coordinate to) throws InvalidMoveException, KingInCheckException {	
 		PieceInterface pieceFrom = board.getPieceAt(from);
 		PieceInterface pieceTo = board.getPieceAt(to);
@@ -280,6 +294,14 @@ public class BoardManager {
 		}
 	}
 	
+	/**
+	 * getMoveIfIsInTheList check is target move is on the list for source type of piece
+	 * @param from source coordinate
+	 * @param to target coordinate
+	 * @param moves list of possible moves for source piece
+	 * @return move
+	 * @throws InvalidMoveException
+	 */
 	private Move getMoveIfIsInTheList(Coordinate from, Coordinate to, List<Move> moves) throws InvalidMoveException{
 		boolean isValid = false;
 		for(Move move: moves){
@@ -296,6 +318,13 @@ public class BoardManager {
 		return null;
 	}
 	
+	/**
+	 * check is planning move is validate
+	 * @param from source coordinate
+	 * @param to target coordinate
+	 * @return true if move is possible, false if not
+	 * @throws KingInCheckException
+	 */
 	private boolean checkPlanningNextMoveIsValidate(Coordinate from, Coordinate to) throws KingInCheckException{
 		PieceInterface pieceFrom = board.getPieceAt(from);
 		PieceInterface pieceTo = board.getPieceAt(to);
@@ -312,6 +341,11 @@ public class BoardManager {
 		return true;
 	}
 	
+	/**
+	 * isKingInCheck check is king will be in check after make a move
+	 * @param kingColor piece color
+	 * @return true if king will be in check, false if not
+	 */
 	private  boolean isKingInCheck(Color kingColor) {
 		List<Move> moves = new ArrayList<Move>();
 		Coordinate kingPosition = null;
@@ -341,6 +375,12 @@ public class BoardManager {
 		return false;
 	}
 
+	/**
+	 * isAnyMoveValid check if any move is possible for actual color pieces on the board
+	 * @param nextMoveColor color piece
+	 * @return true if any move is validate, false if not 
+	 * @throws InvalidMoveException
+	 */
 	private boolean isAnyMoveValid(Color nextMoveColor) throws InvalidMoveException{
 		List<Move> validateMoves =  findValidateMovesForColorOnTheChessboard(nextMoveColor);
 		List<Move> finalList = new ArrayList<>();
@@ -362,7 +402,11 @@ public class BoardManager {
 			return true;
 		}
 	}
-	
+	/**
+	 * find all of validate moves for color of next piece
+	 * @param nextMoveColor 
+	 * @return list of validate moves
+	 */
 	private List<Move> findValidateMovesForColorOnTheChessboard(Color nextMoveColor){
 		List<Move> validateMoves =  new ArrayList<Move>();
 		

@@ -10,6 +10,9 @@ import com.capgemini.chess.algorithms.data.enums.MoveType;
 import com.capgemini.chess.algorithms.data.enums.PieceType;
 import com.capgemini.chess.algorithms.data.generated.Board;
 
+/**
+ * Bishop class stores data about possible moves of this figure, color and type.
+ */
 public class Bishop extends MoveValidator implements PieceInterface {
 
 	private Color color;
@@ -49,9 +52,16 @@ public class Bishop extends MoveValidator implements PieceInterface {
 		return possibleMoves;
 	}
 	
-	private int[][] movesDirection(int startRow, int startColumn, int step){
-		int[][] direction = { {startRow + step, startColumn + step}, {startRow + step, startColumn - step}, 
-							  {startRow - step, startColumn + step}, {startRow - step, startColumn - step} };
+	/**
+	 * movesDirection contains all of possible direction for bishop
+	 * @param startRow source row piece position
+	 * @param startColumn source column piece position 
+	 * @param step step by which the figure moves across the board
+	 * @return table of all moves direction
+	 */
+	private int[][] movesDirection(int startRow, int startColumn, int step) {
+		int[][] direction = { { startRow + step, startColumn + step }, { startRow + step, startColumn - step },
+				{ startRow - step, startColumn + step }, { startRow - step, startColumn - step } };
 		return direction;
 	}
 

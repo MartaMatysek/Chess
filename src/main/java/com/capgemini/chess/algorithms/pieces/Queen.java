@@ -9,6 +9,9 @@ import com.capgemini.chess.algorithms.data.enums.Color;
 import com.capgemini.chess.algorithms.data.enums.PieceType;
 import com.capgemini.chess.algorithms.data.generated.Board;
 
+/**
+ * Queen class stores data about possible moves of this figure, color and type.
+ */
 public class Queen extends MoveValidator implements PieceInterface {
 
 	private Color color;

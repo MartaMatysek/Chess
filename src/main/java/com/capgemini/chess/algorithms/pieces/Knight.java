@@ -10,6 +10,9 @@ import com.capgemini.chess.algorithms.data.enums.MoveType;
 import com.capgemini.chess.algorithms.data.enums.PieceType;
 import com.capgemini.chess.algorithms.data.generated.Board;
 
+/**
+ * Knight class stores data about possible moves of this figure, color and type.
+ */
 public class Knight extends MoveValidator implements PieceInterface {
 
 	private Color color;
@@ -43,14 +46,21 @@ public class Knight extends MoveValidator implements PieceInterface {
 		return possibleMoves;
 	}
 	
-	private int[][] movesDirection(int startRow, int startColumn){
-		int[][] direction = { {startRow-2, startColumn+1}, {startRow-2, startColumn-1}, {startRow-1, startColumn-2}, 
-							  {startRow+1, startColumn-2}, {startRow+2, startColumn-1}, {startRow+2, startColumn+1}, 
-							  {startRow-1, startColumn+2}, {startRow+1, startColumn+2} };
+	/**
+	 * movesDirection contains all of possible direction for knight
+	 * @param startRow source row piece position
+	 * @param startColumn source column piece position 
+	 * @param step step by which the figure moves across the board
+	 * @return table of all moves direction
+	 */
+	private int[][] movesDirection(int startRow, int startColumn) {
+		int[][] direction = { { startRow - 2, startColumn + 1 }, { startRow - 2, startColumn - 1 },
+				{ startRow - 1, startColumn - 2 }, { startRow + 1, startColumn - 2 }, { startRow + 2, startColumn - 1 },
+				{ startRow + 2, startColumn + 1 }, { startRow - 1, startColumn + 2 },
+				{ startRow + 1, startColumn + 2 } };
 		return direction;
 	}
 
-	
 	public Color getColor() {
 		return color;
 	}

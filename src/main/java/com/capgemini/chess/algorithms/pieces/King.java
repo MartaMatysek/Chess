@@ -10,6 +10,9 @@ import com.capgemini.chess.algorithms.data.enums.PieceType;
 import com.capgemini.chess.algorithms.data.generated.Board;
 import com.capgemini.chess.algorithms.data.Move;
 
+/**
+ * King class stores data about possible moves of this figure, execution conditions of castling, color and type.
+ */
 public class King extends MoveValidator implements PieceInterface {
 
 	private Color color;
@@ -46,18 +49,25 @@ public class King extends MoveValidator implements PieceInterface {
 		}
 		
 		if (from.getX() == 4 && from.getY() == 0 && this.color == Color.WHITE) {
-			possibleMoves.addAll(getCastlingMovesIfIsPossibleForWhite(from, board, possibleMoves));
+			possibleMoves.addAll(getCastlingMovesIfIsPossibleForWhite(from, board));
 		}
 
 		
 		if (from.getX() == 4 && from.getY() == 7 && this.color == Color.BLACK) {
-			possibleMoves.addAll(getCastlingMovesIfIsPossibleForBlack(from, board, possibleMoves));
+			possibleMoves.addAll(getCastlingMovesIfIsPossibleForBlack(from, board));
 		}
 
 		return possibleMoves;
 	}
 	
-	private List<Move> getCastlingMovesIfIsPossibleForWhite(Coordinate from, Board board, List<Move> possibleMoves) {
+	/**
+	 * getCastlingMovesIfIsPossibleForWhite returns a list of possible moves for white king which performs a castling move type
+	 * @param from source coordinate
+	 * @param board actual board
+	 * @return list of possible moves
+	 */
+	private List<Move> getCastlingMovesIfIsPossibleForWhite(Coordinate from, Board board) {
+		List<Move> possibleMoves = new ArrayList<Move>();
 		List<Move> movesList = board.getMoveHistory();
 		boolean isValid = true;
 
@@ -108,7 +118,14 @@ public class King extends MoveValidator implements PieceInterface {
 		return possibleMoves;
 	}
 
-	private List<Move> getCastlingMovesIfIsPossibleForBlack(Coordinate from, Board board, List<Move> possibleMoves) {
+	/**
+	 * getCastlingMovesIfIsPossibleForBlack returns a list of possible moves for black king who performs a castling type of move
+	 * @param from source coordinate
+	 * @param board actual board
+	 * @return list of possible moves
+	 */
+	private List<Move> getCastlingMovesIfIsPossibleForBlack(Coordinate from, Board board) {
+		List<Move> possibleMoves = new ArrayList<Move>();
 		List<Move> movesList = board.getMoveHistory();
 		boolean isValid = true;
 

@@ -10,6 +10,9 @@ import com.capgemini.chess.algorithms.data.enums.MoveType;
 import com.capgemini.chess.algorithms.data.enums.PieceType;
 import com.capgemini.chess.algorithms.data.generated.Board;
 
+/**
+ * Pawn class stores data about possible moves of this figure, execution conditions of en passant, color and type.
+ */
 public class Pawn extends MoveValidator implements PieceInterface {
 
 	private Color color;
@@ -52,30 +55,56 @@ public class Pawn extends MoveValidator implements PieceInterface {
 		}
 		
 		if((this.color == Color.WHITE && from.getY() == 4) || (this.color == Color.BLACK && from.getY() == 3)){
-				possibleMoves.addAll(makeEnPassantIfIsPossible(from, board));
+				possibleMoves.addAll(getEnPassantIfIsPossible(from, board));
 		}
 		
 
 		return possibleMoves;
 	}
 
-	private int[][] movesDirectionForWhite(int startRow, int startColumn){
-		int[][] direction = { {startRow, startColumn + 1}, {startRow, startColumn + 2},
-							  {startRow + 1, startColumn + 1}, {startRow - 1, startColumn + 1 } };
+	/**
+	 * movesDirectionForWhite contains all of possible direction for white pawn
+	 * @param startRow source row piece position
+	 * @param startColumn source column piece position 
+	 * @param step step by which the figure moves across the board
+	 * @return table of all moves direction
+	 */
+	private int[][] movesDirectionForWhite(int startRow, int startColumn) {
+		int[][] direction = { { startRow, startColumn + 1 }, { startRow, startColumn + 2 },
+				{ startRow + 1, startColumn + 1 }, { startRow - 1, startColumn + 1 } };
 		return direction;
 	}
 	
+	/**
+	 * movesDirectionForWhite contains all of possible direction for black pawn
+	 * @param startRow source row piece position
+	 * @param startColumn source column piece position 
+	 * @param step step by which the figure moves across the board
+	 * @return table of all moves direction
+	 */
 	private int[][] movesDirectionForBlack(int startRow, int startColumn){
 		int[][] direction = { { startRow, startColumn - 1 }, { startRow, startColumn - 2 },
 							  { startRow + 1, startColumn - 1 }, { startRow - 1, startColumn - 1 } };
 		return direction;
 	}
 	
+	/**
+	 * checkPositionForAttackIsCorrect check the target position is correct depending on the color
+	 * @param color piece color
+	 * @param fromY y coordinate
+	 * @return true or false
+	 */
 	private boolean checkPositionForAttackIsCorrect(Color color, int fromY){
 		return ((color == Color.WHITE && fromY == 1) || (color == Color.BLACK && fromY == 6));
 	}
 
-	private List<Move> makeEnPassantIfIsPossible(Coordinate from, Board board) {
+	/**
+	 * getEnPassantIfIsPossible returns a list of possible moves for pawn which performs en passant move type
+	 * @param from source coordinate
+	 * @param board actual board
+	 * @return list of possible moves
+	 */
+	private List<Move> getEnPassantIfIsPossible(Coordinate from, Board board) {
 		List<Move> possibleMoves = new ArrayList<Move>();
 		List<Move> historyMove = board.getMoveHistory();
 		Move lastMove = historyMove.get(historyMove.size() - 1);
